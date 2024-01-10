@@ -6,6 +6,7 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Poke
 {
@@ -80,6 +81,7 @@ namespace Poke
                 Ash.Items.Add(shop.ItemsInShop[input]);
                 Console.Write("Thanks for buying ");
                 shop.ItemsInShop[input].ShowItem();
+                Thread.Sleep(1000);
             }
         }
 
@@ -141,22 +143,19 @@ namespace Poke
         {
             Ash.Items.Add(item);
         }
-
-        public void CatchPokemon(Pokemon pokemon)
+       public void CatchPokemon(Pokemon pokemon)
         {
-            bool containsPokeBall()
+            for (int i = Ash.Items.Count - 1; i >= 0; i--)
             {
-                return Ash.Items.Any(x => x is Pokeball);
-            }
-
-            if (containsPokeBall())
-            {
-                foreach (Pokeball item in Ash.Items)
+                if (Ash.Items[i] is Pokeball)
                 {
-                    item.UseItem();
+                    ((Pokeball)Ash.Items[i]).UseItem();
                     Thread.Sleep(1000);
                 }
-            } else if (!containsPokeBall()) {
+            }
+
+            if (!Ash.Items.OfType<Pokeball>().Any())
+            {
                 Console.WriteLine("You need to buy pokeballs...");
                 Thread.Sleep(1000);
                 return;
@@ -164,32 +163,30 @@ namespace Poke
 
             Console.WriteLine($"Congrats, you caught {pokemon.Name}.");
             Console.WriteLine($"*Added {pokemon.Name} to your pokedex!*");
+            Ash.Items.RemoveAll(item => item is Pokeball);
             Ash.Pokedex.Add(pokemon);
             Thread.Sleep(1000);
         }
 
         public void HealPokemon(Pokemon pokemon)
         {
-            bool containsPotion()
+            for (int i = Ash.Items.Count - 1; i >= 0; i--)
             {
-                return Ash.Items.Any(x => x is Potion);
-            }
-
-            if (containsPotion())
-            {
-                foreach (Potion item in Ash.Items)
+                if (Ash.Items[i] is Potion)
                 {
-                    item.UseItem();
+                    Ash.Items[i].UseItem();
                     Thread.Sleep(1000);
                 }
-                Console.WriteLine($"{pokemon.Name} is back to full health!");
-                pokemon.SetHealth(pokemon.MaxHealth);
-            } else if (!containsPotion())
+            }
+
+            if (!Ash.Items.OfType<Potion>().Any())
             {
                 Console.WriteLine("You need to buy potions if you want heal...");
                 Thread.Sleep(1000);
+                return;
             }
-            
+            Console.WriteLine($"{pokemon.Name} is back to full health!");
+            pokemon.SetHealth(pokemon.MaxHealth);
             Thread.Sleep(1000);
         }
 
