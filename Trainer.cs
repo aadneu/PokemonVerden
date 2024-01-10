@@ -9,28 +9,34 @@ namespace Poke
 {
     internal class Trainer
     {
-        public List<Pokemon> Pokedex = new List<Pokemon>() { new Pokemon() };
-        public List<IItem> Items =  new List<IItem>();
+        public List<Pokemon> Pokedex;
+        public List<IItem> Items;
 
-        void BuyItem()
+        public Trainer()
         {
+            Pokedex = new List<Pokemon>() { new Pokemon() };
+            Items = new List<IItem>();
+        }
+        public Trainer(int numOFPokemons)
+        {
+            Pokedex = new List<Pokemon>();
 
+            for (int i = 0; i < numOFPokemons; i++)
+            {
+                Pokedex.Add(new Pokemon());
+            }
+            Items = new List<IItem>();
         }
 
-        void CatchPokemon()
+        public Trainer(Pokemon pokemon)
         {
-            bool containsPokeBall()
-            {
-                return Items.Any(x => x is Pokeball);
-            }
-
-            if (containsPokeBall())
-            {
-                foreach (Pokeball item in Items)
-                {
-                    item.UseItem();
-                }
-            }
+            Pokedex = new List<Pokemon>();
+            Pokedex.Add(pokemon);
+            Items = new List<IItem>();
         }
+
+        
+
+        
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Poke
 {
@@ -11,6 +7,11 @@ namespace Poke
         public void UseItem()
         {
             Console.WriteLine("*Uses Healthpotion*");
+        }
+
+        public void ShowItem()
+        {
+            Console.WriteLine("Healthpotion");
         }
     }
 }

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Poke
 {
-    internal interface IItem
+    public interface IItem
     {
-        void UseItem();
+       public void UseItem();
+       public void ShowItem();
     }
 }

@@ -4,9 +4,9 @@
     {
         static void Main(string[] args)
         {
-            
-            var PokeWorld = new World(20);
-         
+
+            var game = new World();
+            game.Run();
         }
     }
 }

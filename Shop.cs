@@ -22,8 +22,13 @@ namespace Poke
 
         public void displayItems()
         {
-
+            Console.WriteLine("Velcome to PokeShop, we can offer the following: ");
+            for (int i = 0; i < ItemsInShop.Count; i++)
+            {
+                Console.Write($"{i}: "); ItemsInShop[i].ShowItem();
+            }
         }
+
 
 
     }

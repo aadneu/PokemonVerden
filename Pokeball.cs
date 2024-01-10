@@ -11,7 +11,11 @@ namespace Poke
         public void UseItem()
         {
             Console.WriteLine("*Throws Pokeball...*");
+        }
 
+        public void ShowItem()
+        {
+            Console.WriteLine("Pokeball");
         }
     }
 }

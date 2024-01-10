@@ -8,19 +8,27 @@ namespace Poke
 {
     internal class World
     {
-        public Shop PokeShop;
+       public SelectedCharacter Character { get; set; }
+       
 
-        public List<Pokemon> WildPokemons = new List<Pokemon>();
+       public World()
+       {
+           Character = new SelectedCharacter();
+           
+       }
 
-      
-        public World(int amountOfPokemons)
-        {
-            PokeShop = new Shop();
+       public void Run()
+       {
+           
+           while (Character.RunGame)
+           { 
+              Console.WriteLine("***Welcome to the world of Pokemon!***");
+              Character.LeaveHouse();
+              Console.Clear();
+           }
 
-            for (int i = 0; i < amountOfPokemons; i++)
-            {
-                WildPokemons.Add(new Pokemon());
-            }
-        }
+           Console.WriteLine("Thanks for playing!");
+       }
+
     }
 }
